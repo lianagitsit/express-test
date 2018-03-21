@@ -1,0 +1,24 @@
+<html>
+
+<head>
+    <title>A Served HTML File</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>You did it!</h1>
+    <a href="/place">Click!</a>
+
+    <script>
+        console.log("script linked")
+        $.ajax({
+            url: "/apitest",
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+        });
+
+    </script>
+</body>
+
+</html>

@@ -11,9 +11,10 @@ var jsonParser = bodyParser.json()
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+app.use(express.static('public'))
+
 app.get('/', (req, res) => {
-    res.send(`<h1>Hello you!</h1>
-        <a href="/place">Click!</a>`)
+    res.sendFile('public/index.html')
 })
 
 // app.get('/:name', (req, res) => {
@@ -38,7 +39,7 @@ app.post('/place2', urlencodedParser, (req, res) => {
     console.log(req.body)
     const message = req.body.message
 
-    count++;
+    count++
     
     res.send(
         `<html>
@@ -48,5 +49,18 @@ app.post('/place2', urlencodedParser, (req, res) => {
             <a href="/">Go back to the first place</a>
         </html>`
     )
+})
+
+app.get('/apitest', (req, res) => {
+    count++
+
+    const fakeObject = {
+        name: "Liana",
+        age: 30,
+        tired: true,
+        apiRequestCount: count
+    }
+
+    res.json(fakeObject)
 })
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
