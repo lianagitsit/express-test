@@ -16,6 +16,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
+    count++
     res.sendFile('public/index.html')
 })
 
@@ -25,6 +26,11 @@ app.get('/', (req, res) => {
 //     res.send(`<h1>Hello ${ name }</h1>
 //         <a href="/place">Click!</a>`)
 // })
+
+app.get('/counter', (req, res) => {
+    const countObject = { counter: count }
+    res.json(countObject)
+})
 
 app.get('/place', (req, res) => res.send(
     `<html>
