@@ -4,6 +4,7 @@ $(document).ready(function(){
         url: "/apitest",
         method: "GET"
     }).then(function (response) {
-        console.log(response);
+        console.log(typeof response);
+        console.log(JSON.parse(response));
     });
 })

@@ -1,6 +1,8 @@
 const express = require('express')
 const PORT = process.env.PORT || 5000
 const bodyParser = require('body-parser')
+const reqPromise = require('request-promise')
+
 let count = 0
 
 const app = express()
@@ -54,6 +56,13 @@ app.post('/place2', urlencodedParser, (req, res) => {
 app.get('/apitest', (req, res) => {
     count++
 
+    reqPromise('http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=CymhH6SlUPj3Xk8g8Y115zIFK0lyCDhV&limit=5')
+    .then((response) => {
+        res.json(response)
+    }).catch((err) => {
+        console.error(err)
+    })
+
     const fakeObject = {
         name: "Liana",
         age: 30,
@@ -61,6 +70,6 @@ app.get('/apitest', (req, res) => {
         apiRequestCount: count
     }
 
-    res.json(fakeObject)
+    
 })
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
